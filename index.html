@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101321">
+  <title>MyAI Companion</title>  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #101321;
+      color: #f1f5f9;
+    }
+
+    .app {
+      max-width: 650px;
+      height: 100dvh;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      background: #151a2b;
+    }
+
+    header {
+      padding: 18px;
+      background: #1b2238;
+      border-bottom: 1px solid #303750;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+      background: #303c60;
+    }
+
+    header h1 {
+      font-size: 18px;
+      margin: 0;
+    }
+
+    header p {
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: #9daac8;
+    }
+
+    #chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .message {
+      max-width: 85%;
+      padding: 12px 15px;
+      border-radius: 16px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .ai {
+      align-self: flex-start;
+      background: #262e47;
+      border-bottom-left-radius: 4px;
+    }
+
+    .user {
+      align-self: flex-end;
+      background: #4263eb;
+      border-bottom-right-radius: 4px;
+    }
+
+    .notice {
+      text-align: center;
+      color: #8995b2;
+      font-size: 12px;
+      padding: 8px;
+    }
+
+    form {
+      display: flex;
+      gap: 8px;
+      padding: 14px;
+      background: #1b2238;
+      border-top: 1px solid #303750;
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid #414b68;
+      border-radius: 12px;
+      background: #101321;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+
+    button {
+      border: 0;
+      border-radius: 12px;
+      padding: 0 18px;
+      background: #6b83ff;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+    }
+  </style></head><body>
+  <main class="app">
+    <header>
+      <div class="avatar">🤖</div>
+      <div>
+        <h1>MyAI Companion</h1>
+        <p>Personal AI · Prototype</p>
+      </div>
+    </header><section id="chat" aria-live="polite">
+  <div class="message ai">สวัสดี! 👋 ฉันคือ MyAI
+
+ตอนนี้ฉันอยู่ในเวอร์ชันทดลอง เรายังต้องเชื่อมต่อโมเดล AI จริงก่อน จึงจะสนทนาได้อย่างเต็มรูปแบบ
+
+คุณอยากให้ฉันมีชื่อและบุคลิกแบบไหน?</div>
+<div class="notice">เวอร์ชันทดลอง · ยังไม่ได้เชื่อมต่อโมเดล AI</div>
+</section>
+
+<form id="chatForm">
+  <input
+    id="messageInput"
+    type="text"
+    placeholder="พิมพ์ข้อความ..."
+    autocomplete="off"
+    aria-label="ข้อความของคุณ"
+    required
+  >
+  <button id="sendButton" type="submit">ส่ง</button>
+</form>
+
+  </main>  <script>
+    const chat = document.getElementById("chat");
+    const form = document.getElementById("chatForm");
+    const input = document.getElementById("messageInput");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const text = input.value.trim();
+      if (!text) return;
+
+      const message = document.createElement("div");
+      message.className = "message user";
+      message.textContent = text;
+
+      chat.appendChild(message);
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+      input.focus();
+    });
+  </script></body>
+  </html>
